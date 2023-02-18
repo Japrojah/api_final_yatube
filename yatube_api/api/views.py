@@ -15,6 +15,11 @@ from posts.models import Post, Group
 
 
 class PostViewSet(viewsets.ModelViewSet):
+    """Вьюсет работает с PostSerializer.
+    Наследован от ModelViewset,
+    Добавлена пагинация,
+    Переопределён метод perform_create."""
+
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (AuthorOrReadOnly,)
@@ -25,6 +30,10 @@ class PostViewSet(viewsets.ModelViewSet):
 
 
 class CommentViewSet(viewsets.ModelViewSet):
+    """Вьюсет работает с CommentSerializer.
+    Наследован от ModelViewset,
+    Переопределён метод get_queryset & perform_create."""
+
     serializer_class = CommentSerializer
     permission_classes = (AuthorOrReadOnly,)
 
@@ -40,6 +49,8 @@ class CommentViewSet(viewsets.ModelViewSet):
 
 
 class GroupViewSet(viewsets.ReadOnlyModelViewSet):
+    """Вьюсет работает с GroupSerializer.
+    Наследован от ModelViewset."""
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
@@ -49,6 +60,12 @@ class FollowViewSet(
     viewsets.GenericViewSet,
     mixins.ListModelMixin
 ):
+    """Вьюсет работает с FollowSerializer.
+    Наследован от mixins таких как:
+    CreateModelMixin, GenericViewSet, ListModelMixin,
+    Добавлена возможность фильтрации,
+    Переопределён метод get_queryset & perform_create."""
+
     serializer_class = FollowSerializer
     permission_classes = (IsAuthenticated,)
     filter_backends = (filters.SearchFilter,)

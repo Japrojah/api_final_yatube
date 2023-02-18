@@ -6,6 +6,10 @@ from posts.models import Comment, Post, User, Group, Follow
 
 
 class PostSerializer(serializers.ModelSerializer):
+    """Cериализатор для модели Post.
+    Работает со всеми полями модели,
+    Переопределено поле author."""
+
     author = SlugRelatedField(
         slug_field='username',
         read_only=True
@@ -17,6 +21,10 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    """Сериализоватор для модели Comments.
+    Работает со всеми полями модели,
+    Переопределены полня author и post."""
+
     author = SlugRelatedField(
         read_only=True,
         slug_field='username'
@@ -32,6 +40,8 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class GroupSerializer(serializers.ModelSerializer):
+    """Сериализоватор для модели Group.
+    Работает со всеми полями модели."""
 
     class Meta:
         fields = '__all__'
@@ -39,6 +49,10 @@ class GroupSerializer(serializers.ModelSerializer):
 
 
 class FollowSerializer(serializers.ModelSerializer):
+    """Сериализоватор для модели Follow.
+    Работает со всеми полями модели,
+    Переопределены поля user & following,
+    Настроен метод валидации."""
     user = SlugRelatedField(
         slug_field='username',
         read_only=True,
