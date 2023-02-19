@@ -20,6 +20,9 @@ API для проекта социальной сети.
 `python -m venv venv`\
 
 ### Для Windows:
+`source venv/Scripts/activate`
+
+### Для Linux & macOS
 `source venv/bin/activate`
 
 ### Установить зависимости из файла requirements.txt:
